@@ -6,6 +6,10 @@ env:
   - DB=MYSQL CORE_RELEASE=3.2
 
 before_script:
+  # install required PHP stuff
+  - sudo apt-get update
+  - sudo apt-get install php5 php5-cli php5-mysql php5-mcrypt php5-xsl php5-xdebug php-apc php5-gd php5-curl php5-intl php5-xmlrpc
+  - sudo service apache2 restart
   - composer self-update || true
   - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
   - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
