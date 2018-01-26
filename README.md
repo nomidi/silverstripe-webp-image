@@ -39,9 +39,9 @@ edit `.htaccess` in your `root` directory, and add `webp` forwarding in compatib
   # Check if browser support WebP images
   RewriteCond %{HTTP_ACCEPT} image/webp
   # Check if WebP replacement image exists
-  RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+  RewriteCond %{DOCUMENT_ROOT}/$1_$2.webp -f
   # Serve WebP image instead
-  RewriteRule (assets.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1]
+  RewriteRule (assets.+)\.(jpe?g|png)$ $1_$2.webp [T=image/webp,E=accept:1]
 </IfModule>
 
 <IfModule mod_headers.c>

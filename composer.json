@@ -6,7 +6,7 @@
         "webp",
         "image"
     ],
-    "version": "0.0.1",
+    "version": "0.0.2",
     "type": "silverstripe-module",
     "authors": [{
         "name": "Bastian Fritsch",
