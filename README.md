@@ -25,7 +25,7 @@ composer require nomidi/silverstripe-webp-image
 - edit `.htaccess` in your `assets` folder, and add `webp` as allowed extension.
 
 ```sh
-<FilesMatch "\.(?i:html|htm|xhtml|js|css|bmp|png|gif|jpg|jpeg|ico|pcx|tif|tiff|au|mid|midi|mpa|mp3|ogg|m4a|ra|wma|wav|cda|avi|mpg|mpeg|asf|wmv|m4v|mov|mkv|mp4|ogv|webm|swf|flv|ram|rm|doc|docx|dotx|dotm|txt|rtf|xls|xlsx|xltx|xltm|pages|ppt|pptx|potx|potm|pps|csv|cab|arj|tar|zip|zipx|sit|sitx|gz|tgz|bz2|ace|arc|pkg|dmg|hqx|jar|xml|pdf|gpx|kml|webp)$">
+<FilesMatch "\.(?i:html|htm|xhtml|js|css|bmp|png|gif|jpg|jpeg|ico|pcx|tif|tiff|au|mid|midi|mpa|mp3|ogg|m4a|ra|wma|wav|cda|avi|mpg|mpeg|asf|wmv|m4v|mov|mkv|mp4|ogv|webm|swf|flv|ram|rm|doc|docx|dotx|dotm|txt|rtf|xls|xlsx|xltx|xltm|pages|ppt|pptx|potx|potm|pps|csv|cab|arj|tar|zip|zipx|sit|sitx|gz|tgz|bz2|ace|arc|pkg|dmg|svg|hqx|jar|xml|pdf|gpx|kml|webp)$">
 	Allow from all
 </FilesMatch>
 ```
@@ -41,7 +41,7 @@ edit `.htaccess` in your `root` directory, and add `webp` forwarding in compatib
   # Check if WebP replacement image exists
   RewriteCond %{DOCUMENT_ROOT}/$1_$2.webp -f
   # Serve WebP image instead
-  RewriteRule (assets.+)\.(jpe?g|png)$ $1_$2.webp [T=image/webp,E=accept:1]
+  RewriteRule (assets.+)\.(jpe?g|JPE?G|png)$ $1_$2.webp [T=image/webp,E=accept:1]
 </IfModule>
 
 <IfModule mod_headers.c>
