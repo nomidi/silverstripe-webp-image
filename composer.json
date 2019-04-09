@@ -23,11 +23,9 @@
     },
     "license": "BSD-3-Clause",
     "require": {
-        "silverstripe/vendor-plugin": "^1.0",
-        "silverstripe/framework": "~4.0"
+        "silverstripe/framework": "^4.1"
     },
     "require-dev": {
-		    "phpunit/PHPUnit": "~3.7@stable"
-	  }
-
+        "phpunit/phpunit": "^5.7"
+    }
 }
