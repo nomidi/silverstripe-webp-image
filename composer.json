@@ -6,20 +6,15 @@
         "webp",
         "image"
     ],
-    "version": "0.0.2",
-    "type": "silverstripe-module",
+    "version": "1.0.0",
+    "type": "silverstripe-vendormodule",
     "authors": [{
         "name": "Bastian Fritsch",
         "email": "mail@bastian-fritsch.de",
         "homepage": "http://www.bastian-fritsch.de/",
         "role": "Developer"
-        },
-        {
-        "name": "Armin Eden",
-        "email": "eden@bit-basti.de",
-        "homepage": "http://www.bastian-fritsch.de/",
-        "role": "Developer"
-    }],
+        }
+        ],
     "extra": {
     "installer-name": "webp-image"
     },
@@ -28,9 +23,8 @@
     },
     "license": "BSD-3-Clause",
     "require": {
-        "php": ">=5.6",
-        "composer/installers": "~1.0",
-        "silverstripe/cms": "~3.1"
+        "silverstripe/vendor-plugin": "^1.0",
+        "silverstripe/framework": "~4.0"
     },
     "require-dev": {
 		    "phpunit/PHPUnit": "~3.7@stable"

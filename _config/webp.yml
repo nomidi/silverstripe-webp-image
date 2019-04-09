@@ -1,0 +1,12 @@
+SilverStripe\Assets\File:
+  allowed_extensions:
+    - webp
+---
+Name: webpcreatorflysystemassetstore
+After:
+  - "assetscore"
+  - "assetstore"
+---
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Assets\Storage\AssetStore:
+    class: Nomidi\WebPCreator\Flysystem\FlysystemAssetStore
