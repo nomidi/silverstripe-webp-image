@@ -4,6 +4,7 @@
 namespace Nomidi\WebPCreator\Flysystem;
 
 use SilverStripe\Assets\Flysystem\FlysystemAssetStore as SS_FlysystemAssetStore;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class FlysystemAssetStore extends SS_FlysystemAssetStore
 {
@@ -49,26 +50,12 @@ class FlysystemAssetStore extends SS_FlysystemAssetStore
 
     public function createWebPImage($path, $filename, $hash, $variant = false)
     {
-        if (function_exists('imagewebp') && function_exists('imagecreatefromjpeg') && function_exists('imagecreatefrompng')) {
-            $orgpath = './'.$this->getAsURL($filename, $hash, $variant);
+        $orgpath = './'.$this->getAsURL($filename, $hash, $variant);
 
-
-
-            list($width, $height, $type, $attr) = getimagesize($path);
-
-            switch ($type) {
-                case 2:
-                    $img = imagecreatefromjpeg($path);
-                    imagewebp($img, $this->createWebPName($orgpath), $this->webp_quality);
-                    break;
-                case 3:
-                    $img = imagecreatefrompng($path);
-                    imagesavealpha($img, true); // save alphablending setting (important)
-                    imagewebp($img, $this->createWebPName($orgpath), $this->webp_quality);
-
-            }
-            imagedestroy($img);
-        }
+        $img = Image::make($path);
+        $img->save($this->createWebPName($orgpath), $this->webp_quality, 'webp');
+        $img->destroy();
+        gc_collect_cycles();
     }
 
     public function createWebPName($filename)

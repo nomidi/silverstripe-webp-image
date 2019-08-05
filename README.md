@@ -11,7 +11,7 @@ This module creates webp images from resized jpeg and png images. More Informati
 ## Requirements
 
 - Silverstripe > 4.2
-- GDLib with webp Extension
+- GDLib or imagick with webp Extension
 
 ## Installation
 
@@ -38,7 +38,7 @@ Below you will find the code to quickly check if webp is available with the inst
 ```php
 <?php
 
-if (function_exists(imagewebp)) {
+if (function_exists('imagewebp')) {
     echo "WebP is available";
 } else {
     echo "WebP is not available";
