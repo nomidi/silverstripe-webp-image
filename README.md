@@ -62,7 +62,7 @@ Below you will find the code to quickly check if webp is available with the inst
 ```php
 <?php
 
-if (function_exists(imagewebp)) {
+if (function_exists('imagewebp')) {
     echo "WebP is available";
 } else {
     echo "WebP is not available";
