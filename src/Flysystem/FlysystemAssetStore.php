@@ -55,7 +55,7 @@ class FlysystemAssetStore extends SS_FlysystemAssetStore
 
 
             list($width, $height, $type, $attr) = getimagesize($path);
-
+            $img = null;
             switch ($type) {
                 case 2:
                     $img = imagecreatefromjpeg($path);
@@ -67,7 +67,9 @@ class FlysystemAssetStore extends SS_FlysystemAssetStore
                     imagewebp($img, $this->createWebPName($orgpath), $this->webp_quality);
 
             }
-            imagedestroy($img);
+            if($img) {
+                imagedestroy($img);
+            }
         }
     }
 
