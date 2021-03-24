@@ -9,9 +9,13 @@ class FlysystemAssetStore extends SS_FlysystemAssetStore
 {
     private static $webp_default_quality = 80;
 
+    // The path, relative to your web root, to the cwebp binary.
+    private static $cwebp_path = 'webp/bin/cwebp';
+
     public function __construct()
     {
         $this->webp_quality = $this->config()->webp_default_quality;
+        $this->cwebp = BASE_PATH . '/' . $this->config()->cwebp_path;
     }
 
 
@@ -68,6 +72,15 @@ class FlysystemAssetStore extends SS_FlysystemAssetStore
 
             }
             imagedestroy($img);
+
+        } else if (file_exists($this->cwebp)) {
+            // Using local cwebp binary method.
+            $cwebp = $this->cwebp;
+            $q = $this->webp_quality;
+            $orgpath = './'.$this->getAsURL($filename, $hash, $variant);
+            $webp_path = $this->createWebPName($orgpath);
+
+            exec("$cwebp -q $q $path -o $webp_path");
         }
     }
 
