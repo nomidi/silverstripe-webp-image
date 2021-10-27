@@ -24,7 +24,7 @@ AddHandler default-handler php phtml php3 php4 php5 inc
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule error[^\\\\/]*\\.html$ - [L]
 
-    # Block invalid file extensions
+    # Allow specific file extensions
     RewriteCond %{REQUEST_URI} !^[^.]*[^\\/]*\\.(?i:css|js<% loop $AllowedExtensions %>|$Extension<% end_loop %>)$
     RewriteRule .* - [F]
 
