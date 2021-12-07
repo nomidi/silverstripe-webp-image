@@ -28,28 +28,29 @@ class WebpImageGenerationTask extends BuildTask
 
         // if a current-folder exists, we assume a symlinked baseFolder like with PHP deployer
         $current = dirname(dirname(Director::baseFolder())) . '/current';
+
         if (is_dir($current)) {
-            $base = dirname(dirname(Director::baseFolder())) . '/shared';
+            $path = dirname(dirname(Director::baseFolder())) . '/shared/public/assets/';
+            chdir(dirname(dirname(Director::baseFolder())));
         } else {
             $base = Director::baseFolder();
+            $path = $base . '/public/assets/';
         }
-        $path = $base . '/public/assets/';
 
         $objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::SELF_FIRST);
         $allowedTypes = array(IMAGETYPE_PNG, IMAGETYPE_JPEG);
-        $pwdLeght = strlen(getcwd()) + 1;
+        $pwdLength = strlen(getcwd()) + 1;
 
         foreach($objects as $name => $object){
             if (is_file($name)) {
                 $detectedType = exif_imagetype($name);
-                if (in_array($detectedType, $allowedTypes) ) {
-                    $relativeName = substr($name, $pwdLeght);
-                    echo "$relativeName\n";
+                if (in_array($detectedType, $allowedTypes)) {
+                    $relativeName = substr($name, $pwdLength);
+                    echo($relativeName."\n");
                     $img = Image::make($relativeName);
                     $img->save($this->createWebPName($relativeName), $webp_quality, 'webp');
                     $img->destroy();
                     gc_collect_cycles();
-
                     echo ($this->createWebPName($relativeName) ."\n\n");
                 }
             }
