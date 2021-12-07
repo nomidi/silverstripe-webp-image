@@ -27,5 +27,11 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nomidi\\WebPCreator\\Flysystem\\": "src/Flysystem/",
+            "Nomidi\\Dev\\Tasks\\": "src/Tasks/"
+        }
     }
 }

@@ -22,14 +22,8 @@ composer require nomidi/silverstripe-webp-image
 ## Usage
 
 - run `dev/build?flush=1`
-
-
-- force Browser to load webp image // Example 1 (default)
-edit `.htaccess` in your `root` directory, and add `webp` forwarding in compatible browsers
-
-
-- force Browser to load webp image // Example 2
-for information on usage of webp image in html see [css-tricks.com](https://css-tricks.com/using-webp-images/)
+- This module "overwrites" `SilverStripe/Assets/Flysystem/PublicAssetAdapter_HTAccess.ss` to force Browser to load webp images like [css-tricks.com](https://css-tricks.com/using-webp-images/)
+- There is a task `dev/tasks/WebpImageGenerationTask` to generate WebP variants for all images (jpg/png) in assets (local assets store only) if you happened to have existing images without webp variants. The task should run per CLI `php ./vendor/silverstripe/framework/cli-script.php dev/tasks/WebpImageGenerationTask` as it likely runs longer than `max_execution_time`.
 
 ## Quick Testfile for checking if webp is available
 
@@ -47,8 +41,9 @@ if (function_exists('imagewebp')) {
 ```
 
 ## TODO
-- documentation
-- IMagick Support
-- PHP test to check support
-- Delete Webp Image 
-- Flush Webp Image
+- [ ] documentation
+- [x] IMagick Support
+- [x] WebpImageGenerationTask
+- [ ] PHP test to check support
+- [ ] Delete Webp Image 
+- [ ] Flush Webp Image

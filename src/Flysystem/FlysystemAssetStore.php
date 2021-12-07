@@ -15,7 +15,6 @@ class FlysystemAssetStore extends SS_FlysystemAssetStore
         $this->webp_quality = $this->config()->webp_default_quality;
     }
 
-
     public function setFromString($data, $filename, $hash = null, $variant = null, $config = array())
     {
         $fileID = $this->getFileID($filename, $hash);
@@ -29,10 +28,6 @@ class FlysystemAssetStore extends SS_FlysystemAssetStore
         }
         return parent::setFromString($data, $filename, $hash, $variant, $config);
     }
-
-
-
-
 
     public function setFromLocalFile($path, $filename = null, $hash = null, $variant = null, $config = array())
     {
