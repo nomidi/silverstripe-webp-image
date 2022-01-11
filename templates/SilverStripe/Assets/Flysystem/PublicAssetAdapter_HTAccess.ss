@@ -28,7 +28,7 @@ AddHandler default-handler php phtml php3 php4 php5 inc
     RewriteCond %{REQUEST_URI} !^[^.]*[^\\/]*\\.(?i:css|js<% loop $AllowedExtensions %>|$Extension<% end_loop %>)$
     RewriteRule .* - [F]
 
-    # Non existant files passed to requesthandler
+    # Non existent files passed to requesthandler
     RewriteCond %{REQUEST_URI} ^(.*)$
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule .* ../index.php [QSA]

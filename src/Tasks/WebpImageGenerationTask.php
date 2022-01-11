@@ -11,7 +11,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 class WebpImageGenerationTask extends BuildTask
 {
 
-    protected $title = 'SilverStripe generating webp Task';
+    protected $title = 'Silverstripe generating webp Task';
 
     protected $description = 'A task for generating webp variants for all (local) images';
 
@@ -42,16 +42,27 @@ class WebpImageGenerationTask extends BuildTask
         $pwdLength = strlen(getcwd()) + 1;
 
         foreach($objects as $name => $object){
+            // Check for existing webp variants and if original is newer
             if (is_file($name)) {
                 $detectedType = exif_imagetype($name);
                 if (in_array($detectedType, $allowedTypes)) {
-                    $relativeName = substr($name, $pwdLength);
-                    echo($relativeName."\n");
-                    $img = Image::make($relativeName);
-                    $img->save($this->createWebPName($relativeName), $webp_quality, 'webp');
-                    $img->destroy();
-                    gc_collect_cycles();
-                    echo ($this->createWebPName($relativeName) ."\n\n");
+                    $shouldCreate = 1;
+                    if (is_file($this->createWebPName($name))) {
+                        if (filemtime($name) > filemtime($this->createWebPName($name))) {
+                            $shouldCreate = 1;
+                        } else {
+                            $shouldCreate = 0;
+                        }
+                    }
+                    if($shouldCreate) {
+                        $relativeName = substr($name, $pwdLength);
+                        echo($relativeName."\n");
+                        $img = Image::make($relativeName);
+                        $img->save($this->createWebPName($relativeName), $webp_quality, 'webp');
+                        $img->destroy();
+                        gc_collect_cycles();
+                        echo ($this->createWebPName($relativeName) ."\n\n");
+                    }
                 }
             }
         }
