@@ -47,12 +47,8 @@ class WebpImageGenerationTask extends BuildTask
                 $detectedType = exif_imagetype($name);
                 if (in_array($detectedType, $allowedTypes)) {
                     $shouldCreate = 1;
-                    if (is_file($this->createWebPName($name))) {
-                        if (filemtime($name) > filemtime($this->createWebPName($name))) {
-                            $shouldCreate = 1;
-                        } else {
-                            $shouldCreate = 0;
-                        }
+                    if (is_file($this->createWebPName($name)) && filemtime($name) < filemtime($this->createWebPName($name))) {
+                        $shouldCreate = 0;
                     }
                     if($shouldCreate) {
                         $relativeName = substr($name, $pwdLength);
