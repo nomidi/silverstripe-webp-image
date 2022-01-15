@@ -42,16 +42,23 @@ class WebpImageGenerationTask extends BuildTask
         $pwdLength = strlen(getcwd()) + 1;
 
         foreach($objects as $name => $object){
-            // Check for existing webp variants and if original is newer
             if (is_file($name)) {
                 $detectedType = exif_imagetype($name);
                 if (in_array($detectedType, $allowedTypes)) {
                     $shouldCreate = 1;
+                    $relativeName = substr($name, $pwdLength);
+
+                    // Check for existing webp variants and if original is newer
                     if (is_file($this->createWebPName($name)) && filemtime($name) < filemtime($this->createWebPName($name))) {
                         $shouldCreate = 0;
                     }
+
+                    // but not in public/assets/.protected/
+                    if (substr($relativeName, 0, 25) === 'public/assets/.protected/') {
+                        $shouldCreate = 0;
+                    }
+
                     if($shouldCreate) {
-                        $relativeName = substr($name, $pwdLength);
                         echo($relativeName."\n");
                         $img = Image::make($relativeName);
                         $img->save($this->createWebPName($relativeName), $webp_quality, 'webp');
