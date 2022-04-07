@@ -13,20 +13,22 @@
         "email": "mail@bastian-fritsch.de",
         "homepage": "http://www.bastian-fritsch.de/",
         "role": "Developer"
+        },
+        {
+            "name": "Lukas Erni",
+            "role": "Developer"
         }
-        ],
+    ],
     "extra": {
-    "installer-name": "webp-image"
+        "installer-name": "webp-image"
     },
     "support": {
-    "issues": "https://github.com/nomidi/silverstripe-webp-image/issues"
+        "issues": "https://github.com/nomidi/silverstripe-webp-image/issues"
     },
     "license": "BSD-3-Clause",
     "require": {
+        "php": ">=7.1",
         "silverstripe/framework": "^4.1"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7"
     },
     "autoload": {
         "psr-4": {

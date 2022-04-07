@@ -45,7 +45,7 @@ class FlysystemAssetStore extends SS_FlysystemAssetStore
 
     public function createWebPImage($path, $filename, $hash, $variant = false)
     {
-        $orgpath = './'.$this->getAsURL($filename, $hash, $variant);
+        $orgpath = './' . $this->getAsURL($filename, $hash, $variant);
 
         $img = Image::make($path);
         $img->save($this->createWebPName($orgpath), $this->webp_quality, 'webp');
@@ -58,6 +58,6 @@ class FlysystemAssetStore extends SS_FlysystemAssetStore
         $picname = pathinfo($filename, PATHINFO_FILENAME);
         $directory = pathinfo($filename, PATHINFO_DIRNAME);
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
-        return $directory.'/'.$picname.'_'.$extension.'.webp';
+        return $directory . '/' . $picname . '_' . $extension . '.webp';
     }
 }

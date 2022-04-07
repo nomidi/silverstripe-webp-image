@@ -1,6 +1,6 @@
 SilverStripe\Assets\File:
   allowed_extensions:
-    - webp
+    webp: false
 ---
 Name: webpcreatorflysystemassetstore
 After:
