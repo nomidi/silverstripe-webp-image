@@ -53,8 +53,8 @@ class WebpImageGenerationTask extends BuildTask
                         $shouldCreate = 0;
                     }
 
-                    // but not in public/assets/.protected/
-                    if (substr($relativeName, 0, 25) === 'public/assets/.protected/') {
+                    // but not in .protected/ folder
+                    if (str_contains($relativeName, '.protected/') ) {
                         $shouldCreate = 0;
                     }
 
